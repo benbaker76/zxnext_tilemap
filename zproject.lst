@@ -1,0 +1,9 @@
+src/bank.c
+src/dma.c
+src/layer2.c
+src/globals.asm
+src/globals.c
+src/sprites.c
+src/tiles.asm
+src/tilemap.c
+src/main.c
