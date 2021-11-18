@@ -30,9 +30,9 @@ Sinclair ZX Spectrum emulator.
 
 If you wanna support us, any donations are welcome:
 
-BTC: 0xb34A97167D8C46f89B2f822244da95f24416D04d
-ETH: 0x3056bc1F8B3cA0c22DAbbE1cdD66EE4947E96e55
-RTM: RJby6dvr7sta1bMC456UkdqWwnqhmY79Ba
+- BTC: bc1q5jnsxgud5ajy86ppxez4pwkzx00920ahqnazkz
+- ETH: 0x3056bc1F8B3cA0c22DAbbE1cdD66EE4947E96e55
+- RTM: RJby6dvr7sta1bMC456UkdqWwnqhmY79Ba
 
 ## Thanks
 
