@@ -32,6 +32,7 @@ If you wanna support us, any donations are welcome:
 
 - BTC: bc1q5jnsxgud5ajy86ppxez4pwkzx00920ahqnazkz
 - ETH: 0x3056bc1F8B3cA0c22DAbbE1cdD66EE4947E96e55
+- RVN: RM2oU8VykXGP33Jqi4uZn9St9sF5MaWuax
 - RTM: RJby6dvr7sta1bMC456UkdqWwnqhmY79Ba
 
 ## Thanks
