@@ -17,4 +17,4 @@ set GAMEDIR=%~dp0
 
 @echo on
 
-%CSPECT_HOME%\CSpect.exe -brk -w4 -tv -zxnext -mmc=%GAMEDIR% %GAMEDIR%\zxnext_tilemap.nex
+%CSPECT_HOME%\CSpect.exe -brk -w3 -tv -zxnext -mmc=%GAMEDIR% %GAMEDIR%\zxnext_tilemap.nex
