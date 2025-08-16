@@ -1,5 +1,5 @@
-#ifndef _GAME_H
-#define _GAME_H
+#ifndef _GLOBALS_H
+#define _GLOBALS_H
 
 #define RTM_28MHZ				0x03
 

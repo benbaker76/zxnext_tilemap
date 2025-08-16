@@ -155,7 +155,7 @@ void dma_transfer(void *dest, void *source, uint16_t length)
 	dma_code_transfer.length = length;
 	dma_code_transfer.dest = dest;
 	
-	z80_otir(&dma_code_transfer, (uint8_t)&IO_DMA, sizeof(dma_code_transfer));
+	z80_otir(&dma_code_transfer, IO_DMA, sizeof(dma_code_transfer));
 }
 
 void dma_transfer_reverse(void *dest, void *source, uint16_t length)
@@ -164,25 +164,25 @@ void dma_transfer_reverse(void *dest, void *source, uint16_t length)
 	dma_code_transfer_reversed.length = length;
 	dma_code_transfer_reversed.dest = dest;
 	
-	z80_otir(&dma_code_transfer_reversed, (uint8_t)&IO_DMA, sizeof(dma_code_transfer_reversed));
+	z80_otir(&dma_code_transfer_reversed, IO_DMA, sizeof(dma_code_transfer_reversed));
 }
 
 void dma_transfer_port(void *source, uint16_t length)
 {
 	dma_code_transfer_io.source = source;
 	dma_code_transfer_io.length = length;
-	dma_code_transfer_io.dest = (void *)(uint8_t)&IO_NEXTREG_DAT;
+	dma_code_transfer_io.dest = (void *)IO_NEXTREG_DAT;
 	
-	z80_otir(&dma_code_transfer_io, (uint8_t)&IO_DMA, sizeof(dma_code_transfer_io));
+	z80_otir(&dma_code_transfer_io, IO_DMA, sizeof(dma_code_transfer_io));
 }
 
 void dma_transfer_sprite(void *source, uint16_t length)
 {
 	dma_code_transfer_io.source = source;
 	dma_code_transfer_io.length = length;
-	dma_code_transfer_io.dest = (void *)(uint8_t)&IO_SPRITE_PATTERN;
+	dma_code_transfer_io.dest = (void *)IO_SPRITE_PATTERN;
 	
-	z80_otir(&dma_code_transfer_io, (uint8_t)&IO_DMA, sizeof(dma_code_transfer_io));
+	z80_otir(&dma_code_transfer_io, IO_DMA, sizeof(dma_code_transfer_io));
 }
 
 void dma_transfer_sample(void *source, uint16_t length, uint8_t scaler, bool loop)
@@ -193,7 +193,7 @@ void dma_transfer_sample(void *source, uint16_t length, uint8_t scaler, bool loo
 	dma_code_sample_io.wr5 = (loop ? SAMPLE_LOOP : SAMPLE_NOLOOP);
 	dma_code_sample_io.dest = (void *)SAMPLE_COVOXPORT;
 
-	z80_otir(&dma_code_sample_io, (uint8_t)&IO_DMA, sizeof(dma_code_sample_io));
+	z80_otir(&dma_code_sample_io, IO_DMA, sizeof(dma_code_sample_io));
 }
 
 void dma_fill(void *dest, uint8_t fill_value, uint16_t length)
@@ -203,5 +203,5 @@ void dma_fill(void *dest, uint8_t fill_value, uint16_t length)
 	dma_code_fill.length = length;
 	dma_code_fill.dest = dest;
 	
-	z80_otir(&dma_code_fill, (uint8_t)&IO_DMA, sizeof(dma_code_fill));
+	z80_otir(&dma_code_fill, IO_DMA, sizeof(dma_code_fill));
 }
