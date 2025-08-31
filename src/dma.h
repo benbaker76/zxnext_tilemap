@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define IO_DMA_PORT             0x6B
 #define SAMPLE_COVOXPORT        0xffdf
 #define SAMPLE_LOOP             D_WR5 | D_WR5_RESTART | D_WR5_CE_WAIT
 #define SAMPLE_NOLOOP           D_WR5
