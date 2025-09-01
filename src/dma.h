@@ -5,7 +5,9 @@
 #include <stdbool.h>
 
 #define IO_DMA_PORT             0x6B
-#define SAMPLE_COVOXPORT        0xffdf
+#define IO_SPRITE_PATTERN_PORT  0x5B
+#define IO_NEXTREG_DAT_PORT     0x253B
+#define SAMPLE_COVOX_PORT       0xFFDF
 #define SAMPLE_LOOP             D_WR5 | D_WR5_RESTART | D_WR5_CE_WAIT
 #define SAMPLE_NOLOOP           D_WR5
 #define SAMPLE_SCALER           12

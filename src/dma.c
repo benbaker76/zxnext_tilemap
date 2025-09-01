@@ -6,6 +6,7 @@
 typedef struct
 {
 	uint8_t disable;
+	uint8_t reset_dma;
 	uint8_t wr0;
 	void *source;
 	uint16_t length;
@@ -24,6 +25,7 @@ typedef struct
 {
 	uint8_t fill_value;
 	uint8_t disable;
+	uint8_t reset_dma;
 	uint8_t wr0;
 	void *source;
 	uint16_t length;
@@ -62,6 +64,7 @@ typedef struct
 dma_code_t dma_code_transfer =
 {
 	.disable = D_DISABLE_DMA,
+	.reset_dma = 0xc3,											// r6-reset dma
 	.wr0 = D_WR0 | D_WR0_X56_LEN | D_WR0_X34_A_START | D_WR0_TRANSFER_A_TO_B,
 	.source = 0,
 	.length = 0,
@@ -79,6 +82,7 @@ dma_code_t dma_code_transfer =
 dma_code_t dma_code_transfer_reversed =
 {
 	.disable = D_DISABLE_DMA,
+	.reset_dma = 0xc3,											// r6-reset dma
 	.wr0 = D_WR0 | D_WR0_X56_LEN | D_WR0_X34_A_START | D_WR0_TRANSFER_A_TO_B,
 	.source = 0,
 	.length = 0,
@@ -96,6 +100,7 @@ dma_code_t dma_code_transfer_reversed =
 dma_code_t dma_code_transfer_io =
 {
 	.disable = D_DISABLE_DMA,
+	.reset_dma = 0xc3,											// r6-reset dma
 	.wr0 = D_WR0 | D_WR0_X56_LEN | D_WR0_X34_A_START | D_WR0_TRANSFER_A_TO_B,
 	.source = 0,
 	.length = 0,
@@ -114,6 +119,7 @@ dma_code_fill_t dma_code_fill =
 {
 	.fill_value = 0,
 	.disable = D_DISABLE_DMA,
+	.reset_dma = 0xc3,											// r6-reset dma
 	.wr0 = D_WR0 | D_WR0_X56_LEN | D_WR0_X34_A_START | D_WR0_TRANSFER_A_TO_B,
 	.source = 0,
 	.length = 0,
@@ -127,7 +133,7 @@ dma_code_fill_t dma_code_fill =
 
 dma_code_sample_t dma_code_sample_io =
 {
-	.disable_dma = D_DISABLE_DMA,								// r6-disable dm
+	.disable_dma = D_DISABLE_DMA,								// r6-disable dma
 	.reset_dma = 0xc3,											// r6-reset dma
 	.reset_port_a = 0xc7,										// r6-reset port a timing
 	.timing_a_b = 0xcb,											// r6-reset port b timing
@@ -140,7 +146,7 @@ dma_code_sample_t dma_code_sample_io =
 	.wr2_scaler = D_WR2X6_X5_PRESCALAR | D_WR2X6_B_CLEN_2,		// r2-cycle length port b 2t with pre-escaler
 	.scaler = 8*SAMPLE_SCALER,									// r2-port b pre-escaler
 	.wr4 = 0x80 | D_WR4_X23_B_START | D_WR4_BURST | 0x01,		// 11001101 r4-burst mode
-	.dest = SAMPLE_COVOXPORT,									// r4-port b, start address
+	.dest = SAMPLE_COVOX_PORT,									// r4-port b, start address
 	.wr5 = SAMPLE_LOOP,											// r5-stop on end of block, rdy active low
 	.read_mask = D_READ_MASK,									// 10111011 read mask follows
 	.mask = 0b00001000,											// mask - only port a hi byte 
@@ -171,7 +177,7 @@ void dma_transfer_port(void *source, uint16_t length)
 {
 	dma_code_transfer_io.source = source;
 	dma_code_transfer_io.length = length;
-	dma_code_transfer_io.dest = (void *)IO_NEXTREG_DAT;
+	dma_code_transfer_io.dest = (void *)IO_NEXTREG_DAT_PORT;
 	
 	z80_otir(&dma_code_transfer_io, IO_DMA_PORT, sizeof(dma_code_transfer_io));
 }
@@ -180,7 +186,7 @@ void dma_transfer_sprite(void *source, uint16_t length)
 {
 	dma_code_transfer_io.source = source;
 	dma_code_transfer_io.length = length;
-	dma_code_transfer_io.dest = (void *)IO_SPRITE_PATTERN;
+	dma_code_transfer_io.dest = (void *)IO_SPRITE_PATTERN_PORT;
 	
 	z80_otir(&dma_code_transfer_io, IO_DMA_PORT, sizeof(dma_code_transfer_io));
 }
@@ -191,7 +197,7 @@ void dma_transfer_sample(void *source, uint16_t length, uint8_t scaler, bool loo
 	dma_code_sample_io.length = length;
 	dma_code_sample_io.scaler = scaler;
 	dma_code_sample_io.wr5 = (loop ? SAMPLE_LOOP : SAMPLE_NOLOOP);
-	dma_code_sample_io.dest = (void *)SAMPLE_COVOXPORT;
+	dma_code_sample_io.dest = (void *)SAMPLE_COVOX_PORT;
 
 	z80_otir(&dma_code_sample_io, IO_DMA_PORT, sizeof(dma_code_sample_io));
 }
